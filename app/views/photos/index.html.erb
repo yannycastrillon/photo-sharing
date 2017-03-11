@@ -3,23 +3,21 @@
 <h1>Listing Photos</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
   <tbody>
+    <tr>
+      <td> Filename </td>
+    </tr>
     <% @photos.each do |photo| %>
       <tr>
-        <td><%= link_to 'Show', photo %></td>
-        <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-        <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td> <%= link_to(image_tag("photos/#{photo.thumbnail}", size:"75x56",border:1), url_for(photo)) %> </td>
+        <td>
+          <%=h photo.filename %> <br>
+          <%= link_to 'Delete me', photo, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @photos %>
 <br>
-
 <%= link_to 'New Photo', new_photo_path %>

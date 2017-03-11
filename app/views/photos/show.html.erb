@@ -1,4 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<div class="">
+  <%= link_to(image_tag("")) %>
+  <p><strong><%= label :filename, "Filename" %>:</strong>
+   <%= @photo.filename %></p>
+  <p><strong><%= label :created_at, "Created at" %>:</strong>
+   <%= @photo.created_at %></p>
+  <p><strong><%= label :thumbnail, "Thumbnail" %>:</strong>
+    <%= @photo.thumbnail %></p>
+  <p><strong><%= label :description, "Description" %>:</strong>
+    <%= @photo.description %></p>
+</div>
+<div class="options">
+  <%= link_to 'Edit', edit_photo_path(@photo) %> |
+  <%= link_to 'Back', photos_path %>
+
+</div>
