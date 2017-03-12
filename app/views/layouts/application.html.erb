@@ -2,11 +2,22 @@
 <html>
 <head>
   <title>Photos</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div>
+    <p class="navbar">
+      &nbsp;
+      <%= link_to :photos, photos_path %>
+      &nbsp;
+      <%= link_to "Categories", categories_path %>
+      &nbsp;
+      <%= link_to "Slideshow", slideshows_path %>
+    </p>
+</div>
+<p style="color:green;"> <%= flash[:notice] %></p>
 
 <%= yield %>
 

@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all.paginate(page:params[:page], :per_page => 1)
+    @photos = Photo.all.paginate(page:params[:page], :per_page => 5)
   end
 
   # GET /photos/1
@@ -15,39 +15,38 @@ class PhotosController < ApplicationController
   # GET /photos/new
   def new
     @photo = Photo.new
+    @all_categories = Category.all.order_by_name
+    @select = []
+  end
+
+  # POST /photos
+  def create
+    @photo = Photo.new(photo_params)
+    @all_categories = Category.find(params[:categories]) if params[:categories]
+    if @photo.save
+      flash[:notice] = 'Photo was successfully created.'
+      redirect_to photos_path
+    else
+      @all_categories = Category.all.order_by_name
+      render :new
+    end
   end
 
   # GET /photos/1/edit
   def edit
+    @all_categories = Category.all.order_by_name
+    @selected = @photo.categories.collect{|cat| cat.id.to_i}
   end
 
-  # POST /photos
-  # POST /photos.json
-  def create
-    @photo = Photo.new(photo_params)
-
-    respond_to do |format|
-      if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-        format.json { render :show, status: :created, location: @photo }
-      else
-        format.html { render :new }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # PATCH/PUT /photos/1
-  # PATCH/PUT /photos/1.json
   def update
-    respond_to do |format|
-      if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @photo }
-      else
-        format.html { render :edit }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
-      end
+    @photo.categories = Category.find(params[:categorie]) if params[:categories]
+    if @photo.update(params[:photo])
+      flash[:notice] = 'Photo was successfully updated.'
+      redirect_to photo_path(@photo)
+    else
+      render :edit
     end
   end
 
@@ -55,10 +54,6 @@ class PhotosController < ApplicationController
   # DELETE /photos/1.json
   def destroy
     @photo.destroy
-    respond_to do |format|
-      format.html { redirect_to photos_url, notice: 'Photo was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private

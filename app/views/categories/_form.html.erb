@@ -1,0 +1,13 @@
+<%= @category.errors.full_messages if @category.errors.any?%>
+
+<%= form_for @category do |f| %>
+  <p><%= f.label :name, "Category name" %><br>
+     <%= f.text_field :name %></p>
+  <p><%= f.label :parent_id, "Parent Category" %><br>
+     <%= collection_select(:category,:parent_id,@all_categories,:id,:long_name) %></p>
+  <p><%= f.label :categories, "Categories" %>
+     <select id="categories" name="categories[]" multiple="multiple" size="10" style="width:250px;">
+     </select>
+     <%= options_from_collection_for_select(@all_categories,:id,:long_name,@selected) %>
+  </p>
+<% end %>

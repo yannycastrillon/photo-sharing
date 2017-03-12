@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+
 gem 'will_paginate'
 gem 'acts_as_tree'
 gem 'acts_as_list'

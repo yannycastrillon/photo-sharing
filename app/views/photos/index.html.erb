@@ -9,7 +9,7 @@
     </tr>
     <% @photos.each do |photo| %>
       <tr>
-        <td> <%= link_to(image_tag("photos/#{photo.thumbnail}", size:"75x56",border:1), url_for(photo)) %> </td>
+        <td> <%= link_to(image_tag("photos/#{photo.thumbnail}", size:"75x56",border:1,class:"thumbnail"), url_for(photo)) %> </td>
         <td>
           <%=h photo.filename %> <br>
           <%= link_to 'Delete me', photo, method: :delete, data: { confirm: 'Are you sure?' } %>
