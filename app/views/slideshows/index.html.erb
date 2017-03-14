@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Slideshows</h1>
+
+<div class=" <%= controller_name %> <%= action_name %> ">
+  <% @slideshows.each do |slideshow| %>
+    <div class=" <%= controller_name %>-summary ">
+      <div class=" <%= controller_name %>-caption ">
+        <%= slideshow.name %>
+        <small>( <%= slideshow.slides.size %> slides)</small>
+      </div>
+      <div class=" <%= controller_name %>-thumbnail ">
+        <%= thumbnail_tag slideshow.slides[0] %>
+        <%= thumbnail_tag slideshow.slides[1] %>
+        <%= thumbnail_tag slideshow.slides[2] %>
+        &nbsp; <strong>. . .</strong>
+      </div>
+      <div class=" <%= controller_name %>-controls">
+        <small>
+          <%= link_to "Play", slideshow_path(slideshow) %>
+          <%= link_to "Edit", edit_slideshow_path(slideshow) %>
+          <%= link_to "Delete", slideshows_path(slideshow),method: :delete, data: {confirm:"Are you sure?"} %>
+        </small>
+      </div>
+    </div>
+    <br/>
+  <% end %>
+</div>
+<br>
+
+<%= link_to 'New Slideshow', new_slideshow_path %>

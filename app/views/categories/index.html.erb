@@ -8,7 +8,7 @@
     <tr>
       <td> <%= category.long_name %> </td>
       <td> <%= link_to "Edit", edit_category_path(category) %>  </td>
-      <td> <%= link_to "Destroy", categories_path(category) %>  </td>
+      <td> <%= link_to "Destroy", categories_path(category), method: :delete, data: {confirm:"Are you sure?"} %>  </td>
     </tr>
   <% end %>
 </table>
