@@ -2,19 +2,27 @@
   <% if @photo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
-
       <ul>
-      <% @photo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @photo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="">
-    <%= label :filename, "Filename" %>
+    <%= f.label :filename, "Filename" %>
     <%= f.text_field :filename  %>
+    <%= f.label :thumbnail, "Thumbnail" %>
+    <%= f.text_field :thumbnail  %>
   </div>
+
+  <p><%= f.label :categories, "Categories" %>
+    <select id="categories" name="categories[]" multiple="multiple" size="10" style="width:250px;">
+      <%=options_from_collection_for_select(@all_categories,:id,
+                                            :long_name,@selected)%>
+    </select>
+  </p>
 
   <div class="actions">
     <%= f.submit %>
