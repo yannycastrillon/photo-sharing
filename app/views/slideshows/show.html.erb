@@ -1,5 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<p><i><%= @slideshow.name %></i></p>
+<div id="slides">
+  <%= render partial: "show_slides" %>
+</div>
+<script type="text/javascript">
+  $(document).ready(() => {
+    setInterval(()=>{
+      $('#slides').load("showslide" )
+    }, 500)
+  })
+</script>
 
 <%= link_to 'Edit', edit_slideshow_path(@slideshow) %> |
 <%= link_to 'Back', slideshows_path %>

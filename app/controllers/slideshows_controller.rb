@@ -10,6 +10,9 @@ class SlideshowsController < ApplicationController
   # GET /slideshows/1
   # GET /slideshows/1.json
   def show
+    session[:slideshow] = @slideshow
+    session[:slide_index] = 0
+    @slide = @slideshow.slides[0]
   end
 
   # GET /slideshows/new
@@ -59,6 +62,18 @@ class SlideshowsController < ApplicationController
       format.html { redirect_to slideshows_url, notice: 'Slideshow was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def showslide
+    # binding.pry
+    @slideshow = Slideshow.find(session[:slideshow]["id"])
+    session[:slide_index] += 1
+    @slide = @slideshow.slides[session[:slide_index]]
+    if @slide.nil?
+      session[:slide_index] = 0
+      @slide = @slideshow.slides[0]
+    end
+    render partial: "show_slides"
   end
 
   private
