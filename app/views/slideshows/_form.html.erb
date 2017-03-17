@@ -2,14 +2,23 @@
   <% if @slideshow.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@slideshow.errors.count, "error") %> prohibited this slideshow from being saved:</h2>
-
       <ul>
-      <% @slideshow.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @slideshow.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
+  <div class="form-group">
+    <%= f.label :name, "Name" %><br>
+    <%= f.text_field :name%>
+    <br><br>
+  </div>
+  <div class="">
+    <%= f.label :created_at, "Create At" %><br>
+    <%= f.text_field :created_at %>
+    <br><br>
+  </div>
 
   <div class="actions">
     <%= f.submit %>

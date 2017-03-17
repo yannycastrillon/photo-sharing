@@ -64,7 +64,8 @@ class SlideshowsController < ApplicationController
     end
   end
 
-  def showslide
+  # GET "/slideshows/show_slide" -> In charge of showing each slide with photo.
+  def show_slide
     # binding.pry
     @slideshow = Slideshow.find(session[:slideshow]["id"])
     session[:slide_index] += 1
@@ -74,6 +75,15 @@ class SlideshowsController < ApplicationController
       @slide = @slideshow.slides[0]
     end
     render partial: "show_slides"
+  end
+
+  def update_slide_order
+    @slideshow = Slideshow.find(session[:slideshow]["id"])
+    
+    params[:order].each_value do |pair_id_pos|
+      Slide.update(pair_id_pos["id"].to_i,position:pair_id_pos["position"].to_i)
+    end
+    render partial: "show_slides_draggable"
   end
 
   private

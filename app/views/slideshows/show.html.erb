@@ -4,11 +4,12 @@
 <div id="slides">
   <%= render partial: "show_slides" %>
 </div>
+
 <script type="text/javascript">
   $(document).ready(() => {
     setInterval(()=>{
-      $('#slides').load("showslide" )
-    }, 500)
+      $('#slides').load("show_slide" )
+    }, 2000)
   })
 </script>
 

@@ -1,6 +1,12 @@
 <h1>Editing Slideshow</h1>
 
-<%= render 'form' %>
+<%= link_to 'Play this Slideshow', slideshow_path(@slideshow) %>
 
+<div id="slideshow-contents">
+  <%= render partial: "show_slides_draggable" %>
+</div>
+<div id="slideshow-attributes">
+  <%= render partial: "form" %>
+</div>
 <%= link_to 'Show', @slideshow %> |
 <%= link_to 'Back', slideshows_path %>
