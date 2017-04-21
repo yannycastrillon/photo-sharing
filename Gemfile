@@ -4,6 +4,8 @@ gem 'will_paginate'
 gem 'acts_as_tree'
 gem 'acts_as_list'
 
+# Entity Rails Diagram Generation
+gem "rails-erd"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record

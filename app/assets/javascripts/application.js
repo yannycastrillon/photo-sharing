@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require dragdrop-sort-slideshow
+//= require show-slides
 //= require_tree .

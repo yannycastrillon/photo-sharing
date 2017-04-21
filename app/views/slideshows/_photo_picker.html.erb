@@ -1,0 +1,6 @@
+<% for photo in @photos_unused %>
+  <%= image_tag("photos/#{photo.thumbnail}",
+                style:"vertical-align:middle;",
+                id:"photo_#{photo.id}",
+                class:"photo") %>
+<% end %>

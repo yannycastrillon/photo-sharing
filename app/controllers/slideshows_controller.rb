@@ -1,5 +1,5 @@
 class SlideshowsController < ApplicationController
-  before_action :set_slideshow, only: [:show, :edit, :update, :destroy]
+  before_action :set_slideshow, only: [:show, :edit, :update, :destroy,         :show_slide, :update_slide_order]
 
   # GET /slideshows
   # GET /slideshows.json
@@ -22,6 +22,8 @@ class SlideshowsController < ApplicationController
 
   # GET /slideshows/1/edit
   def edit
+     session[:slideshow]= @slideshow
+     @photos_unused = unused_photos(@slideshow)
   end
 
   # POST /slideshows
@@ -66,10 +68,8 @@ class SlideshowsController < ApplicationController
 
   # GET "/slideshows/show_slide" -> In charge of showing each slide with photo.
   def show_slide
-    # binding.pry
-    @slideshow = Slideshow.find(session[:slideshow]["id"])
-    session[:slide_index] += 1
     @slide = @slideshow.slides[session[:slide_index]]
+    session[:slide_index] += 1
     if @slide.nil?
       session[:slide_index] = 0
       @slide = @slideshow.slides[0]
@@ -78,18 +78,26 @@ class SlideshowsController < ApplicationController
   end
 
   def update_slide_order
-    @slideshow = Slideshow.find(session[:slideshow]["id"])
-    
     params[:order].each_value do |pair_id_pos|
       Slide.update(pair_id_pos["id"].to_i,position:pair_id_pos["position"].to_i)
     end
     render partial: "show_slides_draggable"
   end
 
+  def unused_photos(slideshow)
+    all_photos = Photo.all
+    slideshow_photos  = slideshow.slides.map {|slide| slide.photo}
+    candidates = all_photos + slideshow_photos - (all_photos & slideshow_photos)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_slideshow
-      @slideshow = Slideshow.find(params[:id])
+      if !params[:id].nil?
+        @slideshow = Slideshow.find(params[:id])
+      else
+        @slideshow = Slideshow.find(session[:slideshow]["id"])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -5,13 +5,5 @@
   <%= render partial: "show_slides" %>
 </div>
 
-<script type="text/javascript">
-  $(document).ready(() => {
-    setInterval(()=>{
-      $('#slides').load("show_slide" )
-    }, 2000)
-  })
-</script>
-
 <%= link_to 'Edit', edit_slideshow_path(@slideshow) %> |
 <%= link_to 'Back', slideshows_path %>

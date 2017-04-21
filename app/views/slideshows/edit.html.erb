@@ -3,10 +3,25 @@
 <%= link_to 'Play this Slideshow', slideshow_path(@slideshow) %>
 
 <div id="slideshow-contents">
-  <%= render partial: "show_slides_draggable" %>
+  <p style="text-align:center;"><b>Slideshow Photos</b></p>
+  <div class="slideshow-thumbs">
+    <%= render partial: "show_slides_draggable" %>
+  </div>
+</div>
+<div id="slideshow-photo-picker">
+  <p style="text-align:center;"><b>Unused Photos</b></p>
+  <div class="slideshow-photos">
+    <%= render partial: "photo_picker" %>
+  </div>
 </div>
 <div id="slideshow-attributes">
-  <%= render partial: "form" %>
+  <div style="boder: thin solid; padding-left: 1em;">
+    <p style="text-align:center;"><b>Attributes</b></p>
+    <%= render partial: "form" %>
+  </div>
+  <p>
+    <b>HINT:</b> Drag and drop photos between the two lists to add and remove photos from the slideshow. Drag photos within the slideshow to rearrange their order.
+  </p>
 </div>
 <%= link_to 'Show', @slideshow %> |
 <%= link_to 'Back', slideshows_path %>
